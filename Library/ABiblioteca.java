@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class Library {
+public class ABiblioteca {
     private ArrayList<Libro> catalogo;
 
-    public Library() {
+    public ABiblioteca() {
         catalogo = new ArrayList<>();
     }
 
@@ -11,9 +11,25 @@ public class Library {
         catalogo.add(libro);
     }
 
+    // Método para obtener una copia del catálogo
+    public ArrayList<Libro> getCatalogo() {
+        return new ArrayList<>(catalogo); // Devuelve una copia del catálogo
+    }
+
+    // Método para consultar los libros disponibles
+    public ArrayList<Libro> getLibrosDisponibles() {
+        ArrayList<Libro> disponibles = new ArrayList<>();
+        for (Libro libro : catalogo) {
+            if (libro.isDisponible()) {
+                disponibles.add(libro);
+            }
+        }
+        return disponibles;
+    }
+
     public boolean deleteBook(String titulo) {
         for (Libro libro : catalogo) {
-            if (libro.getTitulo().equals(titulo)) {
+            if (libro.getTitle().equals(titulo)) {
                 catalogo.remove(libro);
                 return true; // Libro eliminado con éxito
             }
@@ -24,7 +40,7 @@ public class Library {
     public ArrayList<Libro> buscarPorTitulo(String titulo) {
         ArrayList<Libro> resultados = new ArrayList<>();
         for (Libro libro : catalogo) {
-            if (libro.getTitulo().equals(titulo)) {
+            if (libro.getTitle().equals(titulo)) {
                 resultados.add(libro);
             }
         }
@@ -34,7 +50,7 @@ public class Library {
     public ArrayList<Libro> buscarPorAutor(String autor) {
         ArrayList<Libro> resultados = new ArrayList<>();
         for (Libro libro : catalogo) {
-            if (libro.getAutor().equals(autor)) {
+            if (libro.getAuthor().equals(autor)) {
                 resultados.add(libro);
             }
         }
@@ -43,7 +59,7 @@ public class Library {
 
     public boolean prestarLibro(String titulo) {
         for (Libro libro : catalogo) {
-            if (libro.getTitulo().equals(titulo)) {
+            if (libro.getTitle().equals(titulo)) {
                 if (libro.isDisponible()) {
                     libro.setDisponible(false);
                     return true; // Libro prestado con éxito
